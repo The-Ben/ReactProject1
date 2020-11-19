@@ -1,14 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import Button from '@material-ui/core/Button';
-//import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@material-ui/core/styles';
 import './index.css';
+
+const MyButton = styled(({ color, ...other }) => <Button {...other} />)({
+  background: (props) =>
+  props.color === 'red'
+      ? 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
+      : 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+  border: 1,
+  borderRadius: 0,
+  boxShadow: (props) =>
+    props.color === 'red'
+      ? '0 3px 5px 2px rgba(255, 105, 135, .3)'
+      : '0 3px 5px 2px rgba(33, 203, 243, .3)',
+  color: 'black',
+  height: 48,
+  padding: '0 10px',
+  margin: 1,
+});
 
 function Square(props) {
   return (
-    <button className="square" onClick={props.onClick}>
+    <MyButton className="square"
+            onClick={props.onClick}>
       {props.value}
-    </button>
+    </MyButton>
   );
 }
   
@@ -22,6 +42,7 @@ function Square(props) {
       this.setState({
         squares: squares,
         redIsNext: !this.state.redIsNext});
+
     }
 
     renderSquare(i) {
@@ -141,7 +162,7 @@ function Square(props) {
           'Go to game start';
         return (
           <li key={move}>
-            <button onClick={() => this.jumpTo(move)}>{desc}</button>
+            <Button onClick={() => this.jumpTo(move)}>{desc}</Button>
           </li>
         );
       });
