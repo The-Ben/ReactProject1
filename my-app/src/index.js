@@ -8,27 +8,46 @@ import './index.css';
 
 const MyButton = styled(({ color, ...other }) => <Button {...other} />)({
   background: (props) =>
-  props.color === 'red'
+  props.color === 'R'
       ? 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
-      : 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+      : 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)', /* convert to nutral color TODO */
   border: 1,
   borderRadius: 0,
   boxShadow: (props) =>
-    props.color === 'red'
+    props.color === 'R'
       ? '0 3px 5px 2px rgba(255, 105, 135, .3)'
-      : '0 3px 5px 2px rgba(33, 203, 243, .3)',
+      : '0 3px 5px 2px rgba(33, 203, 243, .3)',/* convert to nutral color TODO */
   color: 'black',
   height: 48,
   padding: '0 10px',
   margin: 1,
 });
 
+const MyButtonBlue = styled(({ color, ...other }) => <Button {...other} />)({
+  background: (props) =>
+  props.color === 'B'
+      ?'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)'
+      : 'linear-gradient(45deg, rgb(33, 150, 243) 30%, rgb(33, 203, 243) 90%)',/* convert to nutral color TODO */
+  border: 1,
+  borderRadius: 0,
+  boxShadow: (props) =>
+    props.color === 'B'
+      ? '0 3px 5px 2px rgba(33, 203, 243, .3)'
+      : '0 3px 5px 2px rgba(33, 203, 243, .3)',/* convert to nutral color TODO */
+  color: 'black',
+  height: 48,
+  padding: '0 10px',
+  margin: 1,
+});
+
+
 function Square(props) {
   return (
-    <MyButton className="square"
-            onClick={props.onClick}>
+    <Button className="square"
+            onClick={props.onClick}
+            variant='outlined'>
       {props.value}
-    </MyButton>
+    </Button>
   );
 }
   
@@ -41,7 +60,8 @@ function Square(props) {
       squares[i] = this.state.redIsNext ? 'R' : 'B';
       this.setState({
         squares: squares,
-        redIsNext: !this.state.redIsNext});
+        redIsNext: !this.state.redIsNext,
+        player: this.props.color = !this.state.redIsNext});
 
     }
 
@@ -162,7 +182,9 @@ function Square(props) {
           'Go to game start';
         return (
           <li key={move}>
-            <Button onClick={() => this.jumpTo(move)}>{desc}</Button>
+            <Button 
+            variant='contained'
+            onClick={() => this.jumpTo(move)}>{desc}</Button>
           </li>
         );
       });
