@@ -1,53 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
 import { styled } from '@material-ui/core/styles';
 import './index.css';
 
 const MyButton = styled(({ color, ...other }) => <Button {...other} />)({
   background: (props) =>
   props.color === 'R'
-      ? 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
-      : 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)', /* convert to nutral color TODO */
+      ? 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)':
+  props.color === 'B'
+      ? 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)':
+      'linear-gradient(45deg, #9e9e9e 30%, #757575 90%)',/* convert to nutral color TODO */
   border: 1,
   borderRadius: 0,
   boxShadow: (props) =>
     props.color === 'R'
-      ? '0 3px 5px 2px rgba(255, 105, 135, .3)'
-      : '0 3px 5px 2px rgba(33, 203, 243, .3)',/* convert to nutral color TODO */
-  color: 'black',
-  height: 48,
-  padding: '0 10px',
-  margin: 1,
-});
-
-const MyButtonBlue = styled(({ color, ...other }) => <Button {...other} />)({
-  background: (props) =>
-  props.color === 'B'
-      ?'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)'
-      : 'linear-gradient(45deg, rgb(33, 150, 243) 30%, rgb(33, 203, 243) 90%)',/* convert to nutral color TODO */
-  border: 1,
-  borderRadius: 0,
-  boxShadow: (props) =>
+      ? '0 3px 5px 2px rgba(255, 105, 135, .3)':
     props.color === 'B'
-      ? '0 3px 5px 2px rgba(33, 203, 243, .3)'
-      : '0 3px 5px 2px rgba(33, 203, 243, .3)',/* convert to nutral color TODO */
+      ? '0 3px 5px 2px rgba(33, 203, 243, .3)':
+      '0 3px 5px 2px rgba(33, 33, 33, .3)', /* convert to nutral color TODO */
   color: 'black',
   height: 48,
   padding: '0 10px',
   margin: 1,
 });
-
 
 function Square(props) {
   return (
-    <Button className="square"
+    <MyButton className="square"
             onClick={props.onClick}
-            variant='outlined'>
+            variant='outlined'
+            /*color=''*/>
       {props.value}
-    </Button>
+    </MyButton>
   );
 }
   
@@ -58,16 +43,15 @@ function Square(props) {
         return;
       }
       squares[i] = this.state.redIsNext ? 'R' : 'B';
+      /* squares.color = this.state.redIsNext ? 'R' : 'B'; */ 
       this.setState({
         squares: squares,
-        redIsNext: !this.state.redIsNext,
-        player: this.props.color = !this.state.redIsNext});
+        redIsNext: !this.state.redIsNext});
 
     }
 
     renderSquare(i) {
       return (<Square
-      
        value={this.props.squares[i]}
        onClick={() => this.props.onClick(i)}/>
        );
