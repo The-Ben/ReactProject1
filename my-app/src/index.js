@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 //import Button from '@material-ui/core/Button';
 //import { makeStyles } from '@material-ui/core/styles';
 import './index.css';
+import './calcWinner';
 
 function Square(props) {
   return (
@@ -175,7 +176,9 @@ function Square(props) {
     document.getElementById('root')
   );
   
-  function calculateWinner(squares) {
+  /*function */ 
+  calculateWinner(squares);
+  /* {
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -193,4 +196,4 @@ function Square(props) {
       }
     }
     return null;
-  }
+  }*/
