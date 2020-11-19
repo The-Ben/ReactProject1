@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 //import Button from '@material-ui/core/Button';
 //import { makeStyles } from '@material-ui/core/styles';
 import './index.css';
-import './calcWinner';
 
 function Square(props) {
   return (
@@ -19,13 +18,13 @@ function Square(props) {
       if (calculateWinner(squares)|| squares[i]){
         return;
       }
-      squares[i] = this.state.redIsNext ? 'R' : 'Y';
+      squares[i] = this.state.redIsNext ? 'R' : 'B';
       this.setState({
         squares: squares,
         redIsNext: !this.state.redIsNext});
     }
 
-    renderSquare(i,location) {
+    renderSquare(i) {
       return (<Square
       
        value={this.props.squares[i]}
@@ -114,7 +113,7 @@ function Square(props) {
       if (calculateWinner(squares) || squares[i]) {
         return;
       }
-      squares[i] = this.state.redIsNext ? 'R' : 'Y';
+      squares[i] = this.state.redIsNext ? 'R' : 'B';
       this.setState({
         history: history.concat([{
           squares: squares
@@ -149,9 +148,15 @@ function Square(props) {
 
       let status;
       if (winner) {
-        status = 'Winner: ' + winner;
+        let name ='';
+        if(winner == 'R'){
+          name = 'Red';
+        }else if(winner == 'B'){
+          name = 'Blue';
+        }
+        status = 'Winner: ' + name;
       } else {
-        status = 'Next player: ' + (this.state.redIsNext ? 'Red' : 'Yellow');
+        status = 'Next player: ' + (this.state.redIsNext ? 'Red' : 'Blue');
       }
       return (
         <div className="game">
@@ -176,9 +181,7 @@ function Square(props) {
     document.getElementById('root')
   );
   
-  /*function */ 
-  calculateWinner(squares);
-  /* {
+  function calculateWinner(squares){
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -196,4 +199,4 @@ function Square(props) {
       }
     }
     return null;
-  }*/
+  }
